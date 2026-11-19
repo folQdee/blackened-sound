@@ -1,9 +1,9 @@
 import React from "react";
 
-interface ArtistInfo {
-  artistName: string;
-  primaryGenreName: string;
-  artistLinkUrl: string;
+export interface ArtistInfo {
+  name: string;
+  tags: string[];
+  url: string;
 }
 
 interface Props {
@@ -18,9 +18,13 @@ const ArtistModal: React.FC<Props> = ({ artist, onClose }) => {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h2>{artist.artistName}</h2>
-        <p><strong>Жанр:</strong> {artist.primaryGenreName}</p>
-        <a href={artist.artistLinkUrl} target="_blank">
+        <h2>{artist.name}</h2>
+        {artist.tags.length > 0 && (
+          <p>
+            <strong>Жанры:</strong> {artist.tags.join(", ")}
+          </p>
+        )}
+        <a href={artist.url} target="_blank" rel="noopener noreferrer">
           Перейти к исполнителю
         </a>
         <button onClick={onClose}>Закрыть</button>

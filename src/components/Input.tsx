@@ -16,7 +16,6 @@ function Input() {
       return;
     }
   
-    const apiKey = '4981c2f2e46f594d150e238103c0b5f9';
     const searchUrl = `${BASE_API_URL}?method=track.search&track=${encodeURIComponent(value)}&limit=20&api_key=${API_KEY}&format=json`;
   
     const data = await getApiData(searchUrl);

@@ -1,21 +1,26 @@
 import React, { useState } from "react";
-import ArtistModal from "./ArtistModal";
+import ArtistModal, { ArtistInfo } from "./ArtistModal";
 import { Track } from "./types";
 import { getApiData } from "./getApiData";
 import { API_KEY, BASE_API_URL } from "../constants";
 
 
 function TrackCard({ data }: { data: Track }) {
-  const [artistData, setArtistData] = useState(null);
+  const [artistData, setArtistData] = useState<ArtistInfo | null>(null);
   const [showModal, setShowModal] = useState(false);
 
   async function fetchArtistInfo(name: string) {
     const url = `${BASE_API_URL}?method=artist.getinfo&artist=${encodeURIComponent(name)}&api_key=${API_KEY}&format=json`;
-        const data = await getApiData(url);
-    if (data?.results?.[0]) {
-      setArtistData(data.results[0]);
-      setShowModal(true);
-    }
+    const data = await getApiData(url);
+    const artist = data?.artist;
+    if (!artist) return;
+
+    setArtistData({
+      name: artist.name,
+      tags: (artist.tags?.tag ?? []).slice(0, 5).map((tag: any) => tag.name),
+      url: artist.url,
+    });
+    setShowModal(true);
   }
 
   return (
