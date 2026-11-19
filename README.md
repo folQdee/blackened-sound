@@ -2,7 +2,7 @@
 
 Веб-приложение для поиска музыки: показывает топ метал-треков и ищет песни через [Last.fm API](https://www.last.fm/api). Дипломный проект курса по frontend-разработке.
 
-**Демо:** https://folqdee.github.io/template/
+**Демо:** https://folqdee.github.io/blackened-sound/
 
 ## Возможности
 
